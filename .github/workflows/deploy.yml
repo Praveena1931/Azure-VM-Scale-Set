@@ -1,0 +1,40 @@
+name: Deploy Azure VM Scale Set with Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+
+
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+                  
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.5
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
