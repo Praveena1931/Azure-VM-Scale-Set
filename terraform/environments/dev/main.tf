@@ -1,5 +1,6 @@
 provider "azurerm" {
   features {} 
+  subscription_id = var.subscription_id
 }
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
@@ -30,10 +31,10 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = file(var.ssh_public_key_path)
-    # public_key = file(var.ssh_public_key_path)
-    # public_key = file("C:\\\\Users\\\\mi\\\\.ssh\\\\id_rsa.pub")
+    #public_key = file(var.ssh_public_key_path)
     # public_key = file("${path.module}/${var.ssh_public_key_path}")
+    # public_key = file("C:\\\\Users\\\\mi\\\\.ssh\\\\id_rsa.pub")
+    public_key = file("${path.root}/${var.ssh_public_key_path}")
   }
 
 

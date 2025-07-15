@@ -3,7 +3,7 @@ terraform {
     resource_group_name  = "tfstate-rg1"      
     storage_account_name = "tfstatestorageacct11"      
     container_name       = "tfstate11"                 
-    key                  = "rsv.tfstate"  
+    key                  = "VMSS1.tfstate"  
   }
 }
 
