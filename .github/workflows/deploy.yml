@@ -53,15 +53,15 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Validate
-        run: terraform validate
-
       - name: Pass SSH Public Key as Secret to Terraform
         run: |
          echo "Using SSH Public Key from GitHub Secrets"
 
         env:
           TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+
+      - name: Terraform Validate
+        run: terraform validate
 
       - name: Terraform Plan
         id: tfplan
