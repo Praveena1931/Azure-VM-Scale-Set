@@ -8,7 +8,7 @@ variable "resource_group_name" {
   type        = string
 }   
 
-variable "ssh_public_key_path" {
+variable "ssh_public_key" {
   description = "Path to the SSH public key"
   type        = string
 }
