@@ -49,6 +49,7 @@ jobs:
           echo "ARM_CLIENT_SECRET=${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}" >> $GITHUB_ENV
           echo "ARM_SUBSCRIPTION_ID=${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}" >> $GITHUB_ENV
           echo "ARM_TENANT_ID=${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}" >> $GITHUB_ENV
+          echo "SSH_PUBLIC_KEY=${{ fromJson(secrets.SSH_PUBLIC_KEY) }}" >> $GITHUB_ENV
 
       - name: Terraform Init
         run: terraform init
@@ -56,9 +57,10 @@ jobs:
       - name: Pass SSH Public Key as Secret to Terraform
         run: |
          echo "Using SSH Public Key from GitHub Secrets"
+         
 
         env:
-          TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }} 
 
       - name: Terraform Validate
         run: terraform validate
